@@ -4,19 +4,21 @@ import { ProductContext } from "../Context/ProductContext";
 import Layout from "../Shared/Layout/Layout";
 import { RiDeleteBin3Fill, RiEditCircleFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import Edit from "../Components/SingleProductComponent/Edit";
+
 import { ImCancelCircle } from "react-icons/im";
+import Edit from "../Components/SingleProductcomponents/Edit";
 
 const Cart = () => {
-  const { cartItems, cartcout, HandleDeleteCart } = useContext(ProductContext);
+  const { cartItems, cartcout, HandleDeleteCart, favoriteItem} = useContext(ProductContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [prod, setProd] = useState(null);
   const [selectedSize, setSetectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-  // useEffect(() => {
-  //   console.log("cartItemss:", cartItems);
-  // }, [cartItems]);
+
+  useEffect(() => {
+    console.log("prod:", prod);
+  }, [prod]);
 
   useEffect(() => {
     if (selectedSize) {
@@ -29,6 +31,7 @@ const Cart = () => {
       setProd((prv) => ({ ...prv, quantity: quantity }));
     }
   }, [selectedColor, selectedSize, quantity]);
+  
   return (
     <Layout>
       <div className="min-h-screen bg-white py-10 px-4 md:px-10 relative  flexCol">
@@ -103,7 +106,8 @@ const Cart = () => {
                       <span
                         onClick={(e) => {
                           e.preventDefault();
-                          HandleDeleteCart(item)
+                          HandleDeleteCart(item?.id);
+                      
                         }}
                         title="Delete"
                         className="bg-black text-white px-2 py-1 rounded-md hover:bg-gray-800 cursor-pointer"
@@ -142,7 +146,14 @@ const Cart = () => {
                     </span>
                   </div>
 
-                  <button className="mt-2 w-full bg-black text-white py-2 rounded-md hover:bg-gray-800">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      HandleDeleteCart(prod?.id);
+                      console.log("prodd:", prod);
+                    }}
+                    className="mt-2 w-full bg-black text-white py-2 rounded-md hover:bg-gray-800"
+                  >
                     Remove
                   </button>
                 </div>

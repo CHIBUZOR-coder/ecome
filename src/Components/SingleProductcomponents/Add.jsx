@@ -6,6 +6,7 @@ const Add = ({
   setSelectedSize,
   selectedSize,
   selectedColor,
+  
   setSelectedColor,
   quantity,
   setQuantity,
@@ -18,8 +19,8 @@ const Add = ({
         <div className="flex flex-col md:flex-row gap-6">
           {/* Product Image */}
           <img
-            src={product.image}
-            alt={product.name}
+            src={product?.image}
+            alt={product?.name}
             className="w-full md:w-1/2 h-80 object-cover rounded-xl"
           />
 
@@ -30,15 +31,15 @@ const Add = ({
 
             <div className="mb-4">
               <p className="text-xl font-semibold text-green-700">
-                ${product.price}{" "}
-                {product.discount > 0 && (
+                ${product?.price}{" "}
+                {product?.discount > 0 && (
                   <span className="text-sm text-red-500 ml-2">
-                    ({product.discount}% off)
+                    ({product?.discount}% off)
                   </span>
                 )}
               </p>
               <p className="text-sm text-gray-500 uppercase mt-1">
-                Category: {product.category} → {product.subcategory}
+                Category: {product?.category} → {product?.subcategory}
               </p>
             </div>
 
@@ -66,11 +67,11 @@ const Add = ({
             )}
 
             {/* Colors */}
-            {product.colors && product.colors.length > 0 && (
+            {product?.colors && product?.colors.length > 0 && (
               <div className="mb-4">
                 <h2 className="font-semibold mb-1">Select Color:</h2>
                 <div className="flex gap-3">
-                  {product.colors.map((color) => (
+                  {product?.colors.map((color) => (
                     <button
                       key={color}
                       onClick={() => setSelectedColor(color)}

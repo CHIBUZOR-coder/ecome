@@ -353,11 +353,3 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-
-//vercel
-{
-  "version": 2,
-  "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}

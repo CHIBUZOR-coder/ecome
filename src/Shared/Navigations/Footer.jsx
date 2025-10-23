@@ -11,11 +11,11 @@ const Footer = () => {
         <div>
           <h3 className="text-white font-semibold mb-4">Company</h3>
           <p className="text-sm leading-6">
-            Find a location nearest you. <br />
+            Find us. Find Class. <br />
             See our stores
           </p>
-          <p className="text-sm mt-3">+8801701253995</p>
-          <p className="text-sm text-gray-500">sujon.co@gmail.com</p>
+          <p className="text-sm mt-3">+491521983412</p>
+          <p className="text-sm text-gray-500">sales@klaxonfordresources.com</p>
         </div>
 
         {/* Column 2 */}

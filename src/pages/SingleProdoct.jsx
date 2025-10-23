@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../Context/ProductContext";
 import { useParams } from "react-router-dom";
 import Layout from "../Shared/Layout/Layout";
-import Edit from "../Components/SingleProductComponent/Edit";
-import Add from "../Components/SingleProductComponent/Add";
+import Add from "../Components/SingleProductcomponents/Add";
+
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -26,6 +26,7 @@ const SingleProduct = () => {
   useEffect(() => {
     console.log("product:", product);
   }, [product]);
+  
   useEffect(() => {
     if (productData?.length > 0) {
       const found = productData.find(

@@ -10,8 +10,9 @@ const Edit = ({
   selectedColor,
   selectedSize,
 }) => {
-  const { HandleUpdateCart } = useContext(ProductContext);
 
+  
+  const { HandleUpdateCart } = useContext(ProductContext);
   //   useEffect(() => {
   //     console.log("prodEdit:", product);
   //   }, [product]);

@@ -2,9 +2,11 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 // import { ProductProvider } from "./Context/ProductContext";
 
+
 function App() {
   return (
-    <>
+   
+      <>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -12,8 +14,9 @@ function App() {
         pauseOnHover
         theme="colored" // optional, adds nice look
       />
-      <Outlet />
-    </>
+        <Outlet />
+      </>
+
   );
 }
 

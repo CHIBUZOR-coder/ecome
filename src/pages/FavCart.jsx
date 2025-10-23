@@ -5,11 +5,11 @@ import LinesEllipsis from "react-lines-ellipsis";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import Layout from "../Shared/Layout/Layout";
 
-const NewArrivals = () => {
+const FavCart = () => {
   const [few, setFew] = useState(null);
   const [fewDisplay, setFewDisplay] = useState(true);
-  const [newArrival, setNewArrival] = useState(null);
-  const { HandleGetProducts, productData, HandleAddFavouritrCart, HandleAddTCart } = useContext(ProductContext);
+  const [Men, setMen] = useState(null);
+  const { HandleGetProducts, favoriteItem } = useContext(ProductContext);
 
   useEffect(() => {
     HandleGetProducts();
@@ -17,23 +17,19 @@ const NewArrivals = () => {
   }, []);
 
   useEffect(() => {
-    console.log("productData:", productData);
+    console.log("favoriteItem:", favoriteItem);
 
-    if (productData) {
-      const found = productData?.filter((item) => item?.newArrival === true);
-      if (found) {
-        setNewArrival(found);
-        const less = found?.slice(0, 3);
-        console.log("less:", less);
-        setFew(less);
-      }
+    if (favoriteItem) {
+      setMen(favoriteItem);
+      const less = favoriteItem?.slice(0, 3);
+      setFew(less);
     }
-  }, [productData]);
+  }, [favoriteItem]);
   return (
     <Layout>
       <div className="bg-white lg:pt-12 pt-2 pb-12">
         <p className="text-center text-primary text-2xl font-semibold w-full mt-8 ">
-          New Arrivals
+          Favourite Cart
         </p>
         <p className="text-center text-primary  w-full mt-2 text-lg">
           Stay cozy and stylish with our exclusive collections of best selling
@@ -44,21 +40,18 @@ const NewArrivals = () => {
             <>
               {few &&
                 few?.map((few) => (
-                  <div
+                  <Link
                     to={`/product/${few?.id}`}
                     className="hover:shadow-2xl transition ease-in-out duration-500 rounded-md overflow-hidden "
                   >
                     <div className="w-full  h-[26rem]  overflow-hidden  ">
-                      <Link
-                        to={`/product/${few?.id}`}
-                        className="w-full h-full"
-                      >
+                      <div className="w-full h-full">
                         <img
                           src={few?.image}
                           alt="Fashio"
                           className="  object-cover w-full h-full  "
                         />
-                      </Link>
+                      </div>
                     </div>
                     <div className="p-2">
                       <p className="text-black font-bold mt-2 ">{few?.name}</p>
@@ -75,54 +68,39 @@ const NewArrivals = () => {
                           ${few?.price}
                         </span>
 
-                       <div className="flex justify-between items-center gap-4">
-                          <span
-                            onClick={() => HandleAddFavouritrCart(few)}
-                            className="loveParent rounded-full cursor-pointer p-2 bg-white border-[1px] border-primary flex justify-center items-center  hover:bg-black hover:text-primary  transition ease-in-out duration-500"
-                          >
-                            <FaHeart className="h-6 w-6 love " />
+                        <div className="flex justify-between items-center gap-4">
+                          <span className="rounded-full p-2 bg-white border-[1px] border-primary flex justify-center items-center">
+                            <FaHeart className="h-6 w-6 " />
                           </span>
-                          <span
-                            onClick={() =>
-                              HandleAddTCart(
-                                few,
-                                1,
-                                few?.defaultSize,
-                                few?.defaultColor
-                              )
-                            }
-                            className="loveParent rounded-full cursor-pointer p-2 bg-white border-[1px] border-primary flex justify-center items-center  hover:bg-black hover:text-primary  transition ease-in-out duration-500"
-                          >
-                            <FaShoppingCart className="h-6 w-6 love" />
+                          <span className=" rounded-full p-2 text-white bg-primary flex justify-center items-center">
+                            <FaShoppingCart className="h-6 w-6" />
                           </span>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </>
           ) : (
             <>
-              {newArrival &&
-                newArrival?.map((best) => (
-                  <div
+              {Men &&
+                Men?.map((best) => (
+                  <Link
                     to={`/product/${best?.id}`}
                     className="hover:shadow-2xl transition ease-in-out duration-500 rounded-md overflow-hidden "
                   >
                     <div className="w-full  h-[26rem]  overflow-hidden  ">
-                      <Link
-                        to={`/product/${best?.id}`}
-                        className="w-full h-full"
-                      >
+                      <div className="w-full h-full">
                         <img
                           src={best?.image}
                           alt="Fashio"
                           className="  object-cover w-full h-full  "
                         />
-                      </Link>
+                      </div>
                     </div>
                     <div className="p-2">
                       <p className="text-black font-bold mt-2 ">{best?.name}</p>
+
                       <LinesEllipsis
                         className="text-black  mt-2 z-50"
                         text={best?.description}
@@ -131,29 +109,22 @@ const NewArrivals = () => {
                         trimRight
                       />
 
-                     <div className="flex justify-between items-center gap-4">
-                          <span
-                            onClick={() => HandleAddFavouritrCart(few)}
-                            className="loveParent rounded-full cursor-pointer p-2 bg-white border-[1px] border-primary flex justify-center items-center  hover:bg-black hover:text-primary  transition ease-in-out duration-500"
-                          >
-                            <FaHeart className="h-6 w-6 love " />
+                      <div className="flex justify-between items-center mt-2">
+                        <span className="p-2 bg-primary text-white rounded-md">
+                          ${best?.price}
+                        </span>
+
+                        <div className="flex justify-between items-center gap-4">
+                          <span className="rounded-full p-2 bg-white border-[1px] border-primary flex justify-center items-center">
+                            <FaHeart className="h-6 w-6 " />
                           </span>
-                          <span
-                            onClick={() =>
-                              HandleAddTCart(
-                                best,
-                                1,
-                                best?.defaultSize,
-                                best?.defaultColor
-                              )
-                            }
-                            className="loveParent rounded-full cursor-pointer p-2 bg-white border-[1px] border-primary flex justify-center items-center  hover:bg-black hover:text-primary  transition ease-in-out duration-500"
-                          >
-                            <FaShoppingCart className="h-6 w-6 love" />
+                          <span className=" rounded-full p-2 text-white bg-primary flex justify-center items-center">
+                            <FaShoppingCart className="h-6 w-6" />
                           </span>
                         </div>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </>
           )}
@@ -180,4 +151,4 @@ const NewArrivals = () => {
   );
 };
 
-export default NewArrivals;
+export default FavCart;

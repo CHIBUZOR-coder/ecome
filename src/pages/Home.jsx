@@ -33,13 +33,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { BarLoader, ClipLoader } from "react-spinners";
 import { Link, NavLink } from "react-router-dom";
 import { FaArrowCircleRight, FaHeart, FaShoppingCart } from "react-icons/fa";
-import Test from "../Components/HomeComponents/Test";
+
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../Context/ProductContext";
 
 const Home = () => {
-  const { HandleGetProducts, productData, HandleAddTCart } =
-    useContext(ProductContext);
+  const {
+    HandleGetProducts,
+    productData,
+    HandleAddTCart,
+    HandleAddFavouritrCart,
+  } = useContext(ProductContext);
   const [bestSeller, setBestSeller] = useState(null);
   const [few, setFew] = useState(null);
   const [fewDisplay, setFewDisplay] = useState(true);
@@ -285,7 +289,10 @@ const Home = () => {
                           </span>
 
                           <div className="flex justify-between items-center gap-4">
-                            <span className="rounded-full p-2 bg-white border-[1px] border-primary flex justify-center items-center">
+                            <span
+                              onClick={() => HandleAddFavouritrCart(few)}
+                              className="rounded-full p-2 bg-white border-[1px] border-primary flex justify-center items-center"
+                            >
                               <FaHeart className="h-6 w-6 " />
                             </span>
                             <span
@@ -345,7 +352,10 @@ const Home = () => {
                           </span>
 
                           <div className="flex justify-between items-center gap-4">
-                            <span className="rounded-full p-2 bg-white border-[1px] border-primary flex justify-center items-center">
+                            <span
+                              onDoubleClick={() => HandleAddFavouritrCart(best)}
+                              className="rounded-full p-2 bg-white border-[1px] border-primary flex justify-center items-center"
+                            >
                               <FaHeart className="h-6 w-6 " />
                             </span>
                             <span
