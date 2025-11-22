@@ -352,4 +352,16 @@ export const ProductProvider = ({ children }) => {
       console.log("User is authenticated — handle API cart instead");
     }
   };
+import { AnimatePresence, motion } from "framer-motion";
+<AnimatePresence>
 
+    <motion.li
+      key={item.id}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
+    >
+      {item.name}
+    </motion.li>
+
+</AnimatePresence>

@@ -23,7 +23,7 @@ const ProductProvide = ({ children }) => {
       setCartCount(count);
     }
   }, [cartItems]);
-  
+
   useEffect(() => {
     console.log("favv:", favoriteItem);
     if (favoriteItem) {
@@ -35,7 +35,7 @@ const ProductProvide = ({ children }) => {
 
   const HandleGetProducts = async () => {
     try {
-      const res = await fetch("http://localhost:8000/products", {
+      const res = await fetch("http://localhost:5000/getAllProduct", {
         method: "GET",
       });
 
@@ -43,15 +43,19 @@ const ProductProvide = ({ children }) => {
 
       if (res.ok) {
         console.log(data);
-        setProductData(data);
+        setProductData(data?.data);
         localStorage.setItem("productData", JSON.stringify(data));
       } else {
-        console.log("Unable to fetch data");
+        console.log(data);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
+
+  useEffect(() => {
+    HandleGetProducts();
+  }, []);
 
   const HandleAddTCart = (prod, quantity = null, size = null, color = null) => {
     if (!isAuthentified) {

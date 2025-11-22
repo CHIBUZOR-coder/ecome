@@ -61,6 +61,8 @@ const Home = () => {
     console.log("productData:", productData);
 
     if (productData) {
+      console.log("prod:", productData);
+
       const less = productData?.slice(0, 3);
       console.log("less:", less);
       setFew(less);
@@ -275,13 +277,14 @@ const Home = () => {
                         <p className="text-black font-bold mt-2 ">
                           {few?.name}
                         </p>
-                        <LinesEllipsis
-                          className="text-black  mt-2 z-50"
-                          text={few?.description}
-                          maxLine="1"
-                          ellipsis="..."
-                          trimRight
-                        />
+                        <div className=" w-full">
+                          <LinesEllipsis
+                            text={few?.description}
+                            maxLine="1"
+                            ellipsis="..."
+                            trimRight
+                          />
+                        </div>
 
                         <div className="flex justify-between items-center mt-2">
                           <span className="p-2 bg-primary text-white rounded-md">
